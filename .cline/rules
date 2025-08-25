@@ -1,0 +1,90 @@
+# Cline Rules for AI Prompt Comparison App
+
+## Project Overview
+This is an AI Prompt Comparison Tool that allows users to compare responses from multiple AI providers (Claude, ChatGPT, Perplexity, and Gemini) using a single prompt. The application supports both free tier (mock responses) and paid tier (real API calls) functionality.
+
+## Development Guidelines
+
+### Code Style and Standards
+- Use modern JavaScript (ES6+) with classes and async/await
+- Follow semantic HTML5 structure
+- Use CSS Grid and Flexbox for responsive layouts
+- Implement proper error handling and user feedback
+- Maintain consistent naming conventions (camelCase for JS, kebab-case for CSS)
+
+### File Structure
+```
+ai-prompt-comparison-app/
+├── index.html          # Main HTML file
+├── css/
+│   └── styles.css      # All styling
+├── js/
+│   └── app.js          # Main application logic
+├── assets/             # Images, icons, etc.
+├── docs/               # Documentation
+└── .cline/
+    └── rules           # This file
+```
+
+### Security Considerations
+- API keys are stored in localStorage (client-side only)
+- Real API calls should be proxied through a backend in production
+- Never commit API keys to version control
+- Implement proper input validation and sanitization
+
+### Features to Maintain
+1. **Free Tier Mode**: Mock responses when no API keys are provided
+2. **API Integration**: Support for Claude, ChatGPT, Perplexity, and Gemini APIs
+3. **Responsive Design**: Works on desktop, tablet, and mobile devices
+4. **User Experience**: Loading states, error handling, notifications
+5. **Data Management**: Local storage for settings, copy/export functionality
+
+### API Integration Notes
+- Claude: Uses Anthropic's Messages API
+- ChatGPT: Uses OpenAI's Chat Completions API
+- Perplexity: Uses their Chat Completions API
+- Gemini: Uses Google's Generative Language API
+
+### Testing Requirements
+- Test all providers in both free and paid modes
+- Verify responsive design across different screen sizes
+- Test error handling for invalid API keys
+- Ensure accessibility compliance (keyboard navigation, screen readers)
+
+### Performance Guidelines
+- Minimize bundle size and optimize loading times
+- Use efficient DOM manipulation
+- Implement proper cleanup for event listeners
+- Optimize API calls and handle rate limiting
+
+### Accessibility Requirements
+- Proper ARIA labels and roles
+- Keyboard navigation support
+- High contrast mode compatibility
+- Screen reader friendly content structure
+
+### Browser Compatibility
+- Support modern browsers (Chrome, Firefox, Safari, Edge)
+- Graceful degradation for older browsers
+- Progressive enhancement approach
+
+### Future Enhancement Ideas
+- Add more AI providers (Cohere, Mistral, etc.)
+- Implement response comparison features
+- Add prompt templates and history
+- Support for file uploads and multimodal inputs
+- Advanced settings for model parameters
+- Response analytics and metrics
+
+## Development Workflow
+1. Always test changes in both free and paid modes
+2. Verify responsive design after UI changes
+3. Test error scenarios and edge cases
+4. Update documentation when adding new features
+5. Follow semantic versioning for releases
+
+## Deployment Notes
+- This is a client-side application that can be served statically
+- For production use, implement a backend proxy for API calls
+- Consider implementing rate limiting and usage analytics
+- Set up proper CORS headers if serving from a different domain

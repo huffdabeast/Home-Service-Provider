@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Comparison Tool</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-robot"></i> AI Prompt Comparison Tool</h1>
+            <p>Compare responses from multiple AI providers with a single prompt</p>
+        </header>
+
+        <div class="prompt-section">
+            <div class="prompt-input-container">
+                <label for="prompt-input">Enter your prompt:</label>
+                <textarea 
+                    id="prompt-input" 
+                    placeholder="Type your question or prompt here..."
+                    rows="4"
+                ></textarea>
+                <div class="prompt-actions">
+                    <button id="submit-btn" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Generate Responses
+                    </button>
+                    <button id="clear-btn" class="clear-btn">
+                        <i class="fas fa-trash"></i>
+                        Clear
+                    </button>
+                    <button id="settings-btn" class="settings-btn">
+                        <i class="fas fa-cog"></i>
+                        API Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="responses-grid" id="responses-grid">
+            <div class="response-card" data-provider="claude">
+                <div class="response-header">
+                    <div class="provider-info">
+                        <i class="fas fa-brain"></i>
+                        <h3>Claude (Anthropic)</h3>
+                    </div>
+                    <div class="status-indicator" id="claude-status">
+                        <i class="fas fa-circle"></i>
+                        <span>Ready</span>
+                    </div>
+                </div>
+                <div class="response-content" id="claude-response">
+                    <div class="placeholder">
+                        <i class="fas fa-comment-dots"></i>
+                        <p>Response will appear here...</p>
+                    </div>
+                </div>
+                <div class="response-footer">
+                    <span class="response-time" id="claude-time"></span>
+                    <button class="copy-btn" data-target="claude-response">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="response-card" data-provider="chatgpt">
+                <div class="response-header">
+                    <div class="provider-info">
+                        <i class="fas fa-comments"></i>
+                        <h3>ChatGPT (OpenAI)</h3>
+                    </div>
+                    <div class="status-indicator" id="chatgpt-status">
+                        <i class="fas fa-circle"></i>
+                        <span>Ready</span>
+                    </div>
+                </div>
+                <div class="response-content" id="chatgpt-response">
+                    <div class="placeholder">
+                        <i class="fas fa-comment-dots"></i>
+                        <p>Response will appear here...</p>
+                    </div>
+                </div>
+                <div class="response-footer">
+                    <span class="response-time" id="chatgpt-time"></span>
+                    <button class="copy-btn" data-target="chatgpt-response">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="response-card" data-provider="perplexity">
+                <div class="response-header">
+                    <div class="provider-info">
+                        <i class="fas fa-search"></i>
+                        <h3>Perplexity</h3>
+                    </div>
+                    <div class="status-indicator" id="perplexity-status">
+                        <i class="fas fa-circle"></i>
+                        <span>Ready</span>
+                    </div>
+                </div>
+                <div class="response-content" id="perplexity-response">
+                    <div class="placeholder">
+                        <i class="fas fa-comment-dots"></i>
+                        <p>Response will appear here...</p>
+                    </div>
+                </div>
+                <div class="response-footer">
+                    <span class="response-time" id="perplexity-time"></span>
+                    <button class="copy-btn" data-target="perplexity-response">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="response-card" data-provider="gemini">
+                <div class="response-header">
+                    <div class="provider-info">
+                        <i class="fas fa-gem"></i>
+                        <h3>Gemini (Google)</h3>
+                    </div>
+                    <div class="status-indicator" id="gemini-status">
+                        <i class="fas fa-circle"></i>
+                        <span>Ready</span>
+                    </div>
+                </div>
+                <div class="response-content" id="gemini-response">
+                    <div class="placeholder">
+                        <i class="fas fa-comment-dots"></i>
+                        <p>Response will appear here...</p>
+                    </div>
+                </div>
+                <div class="response-footer">
+                    <span class="response-time" id="gemini-time"></span>
+                    <button class="copy-btn" data-target="gemini-response">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-key"></i> API Configuration</h2>
+                <button class="close-btn" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">
+                    Enter your API keys to use the full capabilities of each provider. 
+                    Leave blank to use free tier (mock responses).
+                </p>
+                
+                <div class="api-config">
+                    <div class="config-group">
+                        <label for="claude-api-key">
+                            <i class="fas fa-brain"></i>
+                            Claude API Key (Anthropic)
+                        </label>
+                        <input type="password" id="claude-api-key" placeholder="sk-ant-...">
+                        <small>Get your key from <a href="https://console.anthropic.com/" target="_blank">Anthropic Console</a></small>
+                    </div>
+
+                    <div class="config-group">
+                        <label for="openai-api-key">
+                            <i class="fas fa-comments"></i>
+                            OpenAI API Key
+                        </label>
+                        <input type="password" id="openai-api-key" placeholder="sk-...">
+                        <small>Get your key from <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a></small>
+                    </div>
+
+                    <div class="config-group">
+                        <label for="perplexity-api-key">
+                            <i class="fas fa-search"></i>
+                            Perplexity API Key
+                        </label>
+                        <input type="password" id="perplexity-api-key" placeholder="pplx-...">
+                        <small>Get your key from <a href="https://www.perplexity.ai/settings/api" target="_blank">Perplexity Settings</a></small>
+                    </div>
+
+                    <div class="config-group">
+                        <label for="gemini-api-key">
+                            <i class="fas fa-gem"></i>
+                            Gemini API Key (Google)
+                        </label>
+                        <input type="password" id="gemini-api-key" placeholder="AIza...">
+                        <small>Get your key from <a href="https://makersuite.google.com/app/apikey" target="_blank">Google AI Studio</a></small>
+                    </div>
+
+                    <div class="config-group openrouter-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-route"></i> OpenRouter (Unified API)</h3>
+                            <p>Use OpenRouter to access all models through a single API (recommended for reliability)</p>
+                        </div>
+                        <label for="openrouter-api-key">
+                            <i class="fas fa-route"></i>
+                            OpenRouter API Key
+                        </label>
+                        <input type="password" id="openrouter-api-key" placeholder="sk-or-...">
+                        <small>Get your key from <a href="https://openrouter.ai/keys" target="_blank">OpenRouter Dashboard</a></small>
+                        
+                        <div class="openrouter-toggle">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="use-openrouter">
+                                <span class="toggle-slider"></span>
+                                Use OpenRouter for all providers (bypasses individual API keys)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save-settings" class="save-btn">
+                    <i class="fas fa-save"></i>
+                    Save Settings
+                </button>
+                <button id="reset-settings" class="reset-btn">
+                    <i class="fas fa-undo"></i>
+                    Reset to Free Tier
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
