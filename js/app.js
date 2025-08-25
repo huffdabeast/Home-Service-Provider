@@ -174,11 +174,11 @@ class AIPromptComparison {
             this.updateStatus(provider, 'loading', 'Generating...');
             
             let response;
-            if (this.apiKeys[provider]) {
-                // Use real API
+            if (this.apiKeys[provider] || (this.useOpenRouter && this.apiKeys.openrouter)) {
+                // Use real API - check for either individual keys OR OpenRouter
                 response = await this.callRealAPI(provider, prompt);
             } else {
-                // Use mock response
+                // Use mock response - only when no API access available
                 response = await this.generateMockResponse(provider, prompt);
             }
             
