@@ -1,0 +1,26 @@
+# Cline Rules
+
+## 1. Memory Bank Management
+- **ALWAYS** read all files in the `memory-bank` directory at the beginning of every session to regain context. This is not optional.
+- **ALWAYS** keep the memory bank files updated. After any significant change, update `activeContext.md` and `progress.md` at a minimum.
+- When asked to "update memory bank", a full review of all memory bank files is required.
+
+## 2. Technical Stack
+- **Frontend:** Use React and Vite.
+- **UI Components:** Use standard HTML5 and CSS, or a library if specified later (e.g., Tailwind CSS).
+- **Backend:** Interact with the Supabase API for all backend operations.
+- **Dependencies:** Use `npm` for package management. Do not use `yarn` or `pnpm`.
+
+## 3. Code Style & Patterns
+- **Formatting:** Adhere to standard JavaScript/React formatting. Use Prettier if a configuration is provided.
+- **Component Structure:** Create components in a `src/components` directory. Each component should be in its own file.
+- **State Management:** For now, use React's built-in state management (useState, useContext).
+- **API Interaction:** Create a dedicated service file (e.g., `src/services/supabase.js`) to encapsulate all Supabase client interactions.
+
+## 4. Version Control
+- Commit messages should be clear and descriptive.
+- Do not commit sensitive information like API keys or secrets. Use a `.gitignore` file and environment variables (`.env.local`).
+
+## 5. Communication
+- When presenting a plan, reference the relevant memory bank files.
+- When a task is complete, update the `progress.md` file accordingly.
